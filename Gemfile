@@ -9,6 +9,9 @@ gem 'jquery-rails', '4.1.1'
 gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.4.1'
 
+# Use Twitter Bootstrap library for front-end UI and layout
+gem 'bootstrap-sass', '3.3.7'
+
 group :development, :test do
   gem 'sqlite3', '1.3.12'
   gem 'byebug',  '9.0.0', platform: :mri
