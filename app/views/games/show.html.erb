@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Secret word:</strong>
+  <%= @game.secret_word %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @game.user_id %>
+</p>
+
+<p>
+  <strong>Outcome:</strong>
+  <%= @game.outcome %>
+</p>
+
+<p>
+  <strong>Letters guessed:</strong>
+  <%= @game.letters_guessed %>
+</p>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

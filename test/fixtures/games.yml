@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  secret_word: MyString
+  user_id: 1
+  outcome: 1
+  letters_guessed: MyString
+
+two:
+  secret_word: MyString
+  user_id: 1
+  outcome: 1
+  letters_guessed: MyString
