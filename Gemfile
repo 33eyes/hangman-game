@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+# The basics
 gem 'rails',        '5.0.1'
 gem 'puma',         '3.4.0'
 gem 'sass-rails',   '5.0.6'
@@ -11,6 +12,10 @@ gem 'jbuilder',     '2.4.1'
 
 # Use Twitter Bootstrap library for front-end UI and layout
 gem 'bootstrap-sass', '3.3.7'
+
+# Use Devise for user authentication
+gem 'devise', '4.2.0'
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.12'
