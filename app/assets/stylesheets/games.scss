@@ -16,7 +16,10 @@
 }
 
 /* Guess-whole-word entry box */
-#guess-whole-word .actions {
+#guess-whole-word {
+  margin-bottom: 15px;
+      
+  .actions {
     display: inline;
     
     .btn-warning {
@@ -25,4 +28,16 @@
       margin-top: -2px;
       font-weight: bold;
     }
+  }
+}
+
+/* Gallows diagram */
+
+/* Secret word box */
+#secret-word-container {
+  .hidden-letter {
+      font-weight: bold;
+      font-size: 20px;
+      margin: 0 4px;
+  }
 }
