@@ -1,6 +1,8 @@
 <h1>Editing Game</h1>
 
-<%= render 'form', game: @game %>
+Secret word: <%= @game.secret_word %>
+<br>
+Letters guessed: <%= @game.letters_guessed %>
 
-<%= link_to 'Show', @game %> |
-<%= link_to 'Back', games_path %>
+<%= render 'edit_form', game: @game %>
+
