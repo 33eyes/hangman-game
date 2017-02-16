@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170215172901) do
+ActiveRecord::Schema.define(version: 20170215225638) do
 
   create_table "games", force: :cascade do |t|
     t.string   "secret_word"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 20170215172901) do
     t.string   "last_sign_in_ip"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "word"
   end
 
 end

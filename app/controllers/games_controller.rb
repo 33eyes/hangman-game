@@ -15,6 +15,20 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
+    
+    # Find a new secret word that the user hasnt played yet
+    @all_words = Word.pluck(:word)
+    
+    @user = User.find(params[:user_id])
+    @user_games_words = @user.games.pluck(:secret_word)
+    
+    @all_words.each { |w|
+      if !( @user_games_words.include? w )
+        @new_secret_word = w
+        break
+      end
+    }
+    
   end
 
   # GET /games/1/edit

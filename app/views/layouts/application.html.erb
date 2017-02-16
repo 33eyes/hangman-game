@@ -37,9 +37,9 @@
           </div>
           
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Play", "/static_pages/about" %></li>
+            <li><%= link_to "Play", new_user_game_path(user_id: current_user.id) if user_signed_in? %></li>
             <li><%= link_to "Leaderboard", "/" %></li>
-            <li><%= link_to "Profile", "/static_pages/about" %></li>
+            <li><%= link_to "Profile", user_path(id: current_user.id) if user_signed_in? %></li>
             <li><%= link_to "About", "/static_pages/about" %></li>
           </ul>
         </div><!-- /.navbar-collapse -->

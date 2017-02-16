@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+Word.create(word: 'potato')
+Word.create(word: 'tomato')
+Word.create(word: 'lettuce')
+Word.create(word: 'broccoli')
+Word.create(word: 'carrot')
+Word.create(word: 'mushroom')
+Word.create(word: 'pepper')
+Word.create(word: 'onion')
+Word.create(word: 'avocado')
+Word.create(word: 'spinach')
