@@ -11,6 +11,15 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    
+    # Look at the games the user played 
+    @user_games = @user.games.where(outcome: [0, 1]).order(created_at: :desc)
+    @user_wins = @user.games.where("outcome = 1")
+    
+    @user_games_count = @user_games.length
+    @user_wins_count = @user_wins.length
+    @user_success_ratio = (( @user_wins_count * 1.00) / @user_games_count * 100).round()
+    
   end
 
   # GET /users/new

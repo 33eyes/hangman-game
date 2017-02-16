@@ -10,5 +10,31 @@
   <%= @user.email %>
 </p>
 
+<p>
+  <strong>Games played count:</strong>
+  <%= @user_games_count %>
+</p>
+
+<p>
+  <strong>Games won count:</strong>
+  <%= @user_wins_count %>
+</p>
+
+<p><strong>Success ratio:</strong>
+  <%= @user_success_ratio %>%
+</p>
+
+<p>
+  <strong>Games played:</strong>
+  <% @user_games.each_with_index { |game, ind| %>
+    <br>
+    <%= game.created_at %>
+    <%= game.secret_word %>
+    <%= game.letters_guessed %>
+    <%= game.outcome %>
+  <% } %>
+  
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
