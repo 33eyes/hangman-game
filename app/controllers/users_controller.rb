@@ -5,6 +5,11 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    @users_w_game_counts = User.select("users.*, COUNT(games.id) as games_count").joins("LEFT OUTER JOIN games ON (games.user_id = users.id)")
+    .where("games.outcome = 1")
+    .group("users.id")
+    .order("games_count DESC")
+    .limit(10)
   end
 
   # GET /users/1

@@ -1,3 +1,46 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/* Homepage */
+/** Leaderboard */
+#leaderboard {
+  margin-bottom: 2em;
+  
+  h1 {
+    color: green;
+    font-weight: bold;
+  }
+  
+  table {
+    margin: 0 auto;
+    text-align: left;
+    margin-bottom: 2em;
+  }
+  thead {
+    font-size: 1.5em;
+  }
+  th, td {
+    padding: 0 40px;
+    text-align: center;
+  }
+  
+  td {
+    /* mouse over link */
+    a:hover {
+      background-color: inherit;
+    }
+  }
+  
+  tbody tr:hover {
+    background-color: rgba(0, 0, 255, 0.23);
+  }
+  
+  .btn.btn-success {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 1em;
+  }
+}
