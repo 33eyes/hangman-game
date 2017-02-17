@@ -1,8 +1,60 @@
-<h1>Editing Game</h1>
-
 Secret word: <%= @game.secret_word %>
 <br>
 Letters guessed: <%= @game.letters_guessed %>
+<br>
+Wrong guesses: <%= @wrong_guesses_num %>
+<br>
+All guesses count: <%= @lguesses.length %> 
+<br>
+Correct guesses count: <%= @correct_guesses_num %>
+<br>
+Correct guesses list: <%= @correct_guesses_list %>
+<br>
 
-<%= render 'edit_form', game: @game %>
-
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-1">
+    <div class="well">
+      <div id="gallows-container" class="text-center">
+        <% case @wrong_guesses_num %>
+        <%  when 0 %>
+          <%= image_tag("gallows_0.png") %>
+        <%  when 1 %>
+          <%= image_tag("gallows_1.png") %>
+        <%  when 2 %>
+          <%= image_tag("gallows_2.png") %>
+        <%  when 3 %>
+          <%= image_tag("gallows_3.png") %>
+        <%  when 4 %>
+          <%= image_tag("gallows_4.png") %>
+        <%  when 5 %>
+          <%= image_tag("gallows_5.png") %>
+        <%  when 6 %>
+          <%= image_tag("gallows_6.png") %>
+        <%  when 7 %>
+          <%= image_tag("gallows_7.png") %>
+        <%  when 8 %>
+          <%= image_tag("gallows_8.png") %>
+        <%  when 9 %>
+          <%= image_tag("gallows_9.png") %>
+        <%  when 10 %>
+          <%= image_tag("gallows_10.png") %>
+        <% end %>
+      </div>
+      <div id="secret-word-container" class="text-center">
+        <br>
+        <% @game.secret_word.split('').each { |secret_letter| %>
+          <% if @game.letters_guessed.downcase.include? secret_letter %>
+            <span class="shown-letter"><%= secret_letter.upcase %></span>
+          <% else %>
+            <span class="hidden-letter">__</span>
+          <% end %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-sm-offset-1">
+    <div class="well">
+      <%= render 'edit_form', game: @game %>
+    </div>
+  </div>
+</div>

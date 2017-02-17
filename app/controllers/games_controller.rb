@@ -36,6 +36,27 @@ class GamesController < ApplicationController
     @user = User.find( params[:user_id] )
     @game = @user.games.find( params[:id] )
     
+    @game.letters_guessed = '' if @game.letters_guessed.nil?
+    @lguesses = @game.letters_guessed.downcase
+    
+    # Count wrong guesses for gallows diagram
+    @correct_guesses_num = 0
+    @correct_guesses_list = []
+    @game.secret_word.split('').each_with_index { |ch, ind| 
+      if !( @game.secret_word.split('').take(ind).include? ch )
+        if @lguesses.include? ch 
+          @correct_guesses_num = @correct_guesses_num + 1
+          @correct_guesses_list.push(ch)
+        end
+      end
+    }
+    @wrong_guesses_num = @lguesses.length - @correct_guesses_num
+   
+      
+    # List all guessed letters do disable their buttons
+    
+    # List all correctly guessed letters to display them in the secret word box
+    
   end
 
   # POST /games
@@ -229,14 +250,18 @@ class GamesController < ApplicationController
       
       @lguesses = @game.letters_guessed.downcase
       @correct_guesses_num = 0
-      @game.secret_word.split('').each { |ch| 
-        if @lguesses.include? ch 
-          @correct_guesses_num = @correct_guesses_num + 1
+      @secret_word_unique_letters_count = 0
+      @game.secret_word.split('').each_with_index { |ch, ind| 
+        if !( @game.secret_word.split('').take(ind).include? ch )
+          if @lguesses.include? ch 
+            @correct_guesses_num = @correct_guesses_num + 1
+          end
+          @secret_word_unique_letters_count = @secret_word_unique_letters_count + 1
         end
       }
       
       # Did user guess all letters of secret word?
-      if @correct_guesses_num == @game.secret_word.length
+      if @correct_guesses_num == @secret_word_unique_letters_count
         # Won game, b/c user guessed all letters of secret word
         @game.outcome = 1
       else

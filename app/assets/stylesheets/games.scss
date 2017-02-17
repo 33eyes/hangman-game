@@ -36,8 +36,20 @@
 /* Secret word box */
 #secret-word-container {
   .hidden-letter {
-      font-weight: bold;
-      font-size: 20px;
-      margin: 0 4px;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 4px;
+    border-bottom: 3px solid black;
+    color: transparent;
+    width: 20px;
+    display: inline-block;
+  }
+  .shown-letter {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 5px;
+    border-bottom: 3px solid;
+    width: 20px;
+    display: inline-block;
   }
 }

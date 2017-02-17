@@ -12,39 +12,21 @@
   <% end %>
 
   <div id="guess-letters">
-    <%= submit_tag 'A', name: 'guessed_letter_a' %>
-    <%= submit_tag 'B', name: 'guessed_letter_b' %>
-    <%= submit_tag 'C', name: 'guessed_letter_c' %>
-    <%= submit_tag 'D', name: 'guessed_letter_d' %>
-    <%= submit_tag 'E', name: 'guessed_letter_e' %>
-    <%= submit_tag 'F', name: 'guessed_letter_f' %>
-    <%= submit_tag 'G', name: 'guessed_letter_g' %>
-    <%= submit_tag 'H', name: 'guessed_letter_h' %>
-    <%= submit_tag 'I', name: 'guessed_letter_i' %>
-    <%= submit_tag 'J', name: 'guessed_letter_j' %>
-    <%= submit_tag 'K', name: 'guessed_letter_k' %>
-    <%= submit_tag 'L', name: 'guessed_letter_l' %>
-    <%= submit_tag 'M', name: 'guessed_letter_m' %>
-    <%= submit_tag 'N', name: 'guessed_letter_n' %>
-    <%= submit_tag 'O', name: 'guessed_letter_o' %>
-    <%= submit_tag 'P', name: 'guessed_letter_p' %>
-    <%= submit_tag 'Q', name: 'guessed_letter_q' %>
-    <%= submit_tag 'R', name: 'guessed_letter_r' %>
-    <%= submit_tag 'S', name: 'guessed_letter_s' %>
-    <%= submit_tag 'T', name: 'guessed_letter_t' %>
-    <%= submit_tag 'U', name: 'guessed_letter_u' %>
-    <%= submit_tag 'V', name: 'guessed_letter_v' %>
-    <%= submit_tag 'W', name: 'guessed_letter_w' %>
-    <%= submit_tag 'X', name: 'guessed_letter_x' %>
-    <%= submit_tag 'Y', name: 'guessed_letter_y' %>
-    <%= submit_tag 'Z', name: 'guessed_letter_z' %>
+    <h2> Pick A Letter!</h2>
+    <% "ABCDEFGHIJKLMNOPQRSTUVWXYZ".each_char { |alpha| %>
+      <% if @game.letters_guessed.include? alpha %>
+        <%= submit_tag alpha, name: 'guessed_letter_' + alpha.downcase, class: "btn btn-primary", disabled: true %>
+      <% else %>
+        <%= submit_tag alpha, name: 'guessed_letter_' + alpha.downcase, class: "btn btn-primary" %>
+      <% end %>
+    <% } %>
   </div>
-  
-  <div id="guess-whole-word" class="well">
-    <%= text_field_tag 'guess_whole_word', nil, placeholder: 'Guess the whole word' %>
-  
+  <hr>
+  <div id="guess-whole-word" class="text-center">
+    <h2> Guess the whole word!</h2>
+    <%= text_field_tag 'guess_whole_word', nil, placeholder: 'Enter your guess here' %>
     <div class="actions">
-      <%= f.submit "Submit" %>
+      <%= f.submit "Submit", class: "btn btn-warning" %>
     </div>
   </div>
   
