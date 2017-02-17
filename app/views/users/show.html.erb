@@ -1,40 +1,92 @@
-<p id="notice"><%= notice %></p>
-<h1>Hey!</h1>
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1 class="text-center profile-greeting">
+      <% if user_signed_in? %>
+      Hello, <%= @user.name %>!
+      <% else %>
+        <%= @user.name %>'s profile
+      <% end %>
+    </h1>
+    <div id="profile-stats" class="well text-center">
+        <h2>Game Stats</h2>
+        <div class="row">
+          <div class="col-sm-4">
+            <strong>Games played:</strong>
+            <%= @user_games_count %>
+          </div>
+          
+          <div class="col-sm-4">
+            <strong>Games won:</strong>
+            <%= @user_wins_count %>
+          </div>
+          
+          <div class="col-sm-4">
+            <strong>Success ratio:</strong>
+            <%= @user_success_ratio %>%
+          </div>
+        </div>
+    </div>
+    
+    <div id="profile-history" class="well text-center">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2>Games Played</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Secret word</th>
+                  <th>Letters guessed</th>
+                  <th>Game outcome</th>
+                </tr>
+              </thead>
+          
+              <tbody>
+              <% @user_games.each_with_index { |game, ind| %>
+                <tr>
+                    <td><%= game.created_at %></td>
+                    <td><%= game.secret_word %></td>
+                    <td><%= game.letters_guessed %></td>
+                    <td class="text-center">
+                      <% if game.outcome == 0 %>
+                      <span class="lost-game">LOST</span>
+                      <% elsif game.outcome == 1 %>
+                      <span class="won-game">WON</span>
+                      <% end %>
+                    </td>
+                </tr>
+              <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+    </div>
+    
+    <% if user_signed_in? %>
+      <div id="profile-details" class="well text-center">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2>Profile Details</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <strong>Name:</strong>
+            <%= @user.name %>
+          </div>
+          <div class="col-xs-4">
+            <strong>Email:</strong>
+            <%= @user.email %>
+          </div>
+          <div class="col-xs-4">
+            <%= link_to 'Edit', edit_user_path(@user) %> 
+          </div>
+        </div>
+      </div>
+    <% end %>
+    
+  </div>
+</div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
 
-<p>
-  <strong>Games played count:</strong>
-  <%= @user_games_count %>
-</p>
-
-<p>
-  <strong>Games won count:</strong>
-  <%= @user_wins_count %>
-</p>
-
-<p><strong>Success ratio:</strong>
-  <%= @user_success_ratio %>%
-</p>
-
-<p>
-  <strong>Games played:</strong>
-  <% @user_games.each_with_index { |game, ind| %>
-    <br>
-    <%= game.created_at %>
-    <%= game.secret_word %>
-    <%= game.letters_guessed %>
-    <%= game.outcome %>
-  <% } %>
-  
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

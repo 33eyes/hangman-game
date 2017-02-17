@@ -44,3 +44,81 @@
     margin-top: 1em;
   }
 }
+
+
+
+/* User profile page */
+.profile-greeting {
+    color: green;
+    margin-bottom: 1em;
+}
+
+/** Profile stats */
+#profile-stats {
+  margin-bottom: 2em;
+  
+  h2 {
+      margin-top: 0;
+      color: blue;
+  }
+}
+
+/** Profile game history */
+#profile-history {
+  margin-bottom: 2em;
+  
+  h2 {
+      margin-top: 0;
+      color: blue;
+  }
+  
+  table {
+    margin: 0 auto;
+    text-align: left;
+    margin-bottom: 2em;
+  }
+  thead {
+    //font-size: 1.5em;
+  }
+  th, td {
+    padding: 0 10px;
+   // text-align: center;
+  }
+  
+  td {
+    /* mouse over link */
+    a:hover {
+      background-color: inherit;
+    }
+    
+    .lost-game {
+      color: red;
+      font-weight: bold;
+    }
+    .won-game {
+      color: green;
+      font-weight: bold;
+    }
+  }
+  
+  tbody tr:hover {
+    background-color: rgba(0, 0, 255, 0.23);
+  }
+  
+}
+
+
+/** Profile details */
+#profile-details {
+  margin-bottom: 2em;
+  
+  h2 {
+      margin-top: 0;
+      color: blue;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    background-color: inherit;
+  }
+}
