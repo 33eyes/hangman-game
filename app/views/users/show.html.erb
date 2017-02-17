@@ -30,42 +30,45 @@
             </div>
           </div>
       </div>
+    
       
-      <div id="profile-history" class="well text-center">
-          <div class="row">
-            <div class="col-sm-12">
-              <h2>Games Played</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Timestamp</th>
-                    <th>Secret word</th>
-                    <th>Letters guessed</th>
-                    <th>Game outcome</th>
-                  </tr>
-                </thead>
-            
-                <tbody>
-                <% @user_games.each_with_index { |game, ind| %>
-                  <tr>
-                      <td><%= game.created_at %></td>
-                      <td><%= game.secret_word %></td>
-                      <td><%= game.letters_guessed %></td>
-                      <td class="text-center">
-                        <% if game.outcome == 0 %>
-                        <span class="lost-game">LOST</span>
-                        <% elsif game.outcome == 1 %>
-                        <span class="won-game">WON</span>
-                        <% end %>
-                      </td>
-                  </tr>
-                <% } %>
-                </tbody>
-              </table>
+      <% if @user == current_user %>
+        <div id="profile-history" class="well text-center">
+            <div class="row">
+              <div class="col-sm-12">
+                <h2>Games Played</h2>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Timestamp</th>
+                      <th>Secret word</th>
+                      <th>Letters guessed</th>
+                      <th>Game outcome</th>
+                    </tr>
+                  </thead>
+              
+                  <tbody>
+                  <% @user_games.each_with_index { |game, ind| %>
+                    <tr>
+                        <td><%= game.created_at %></td>
+                        <td><%= game.secret_word %></td>
+                        <td><%= game.letters_guessed %></td>
+                        <td class="text-center">
+                          <% if game.outcome == 0 %>
+                          <span class="lost-game">LOST</span>
+                          <% elsif game.outcome == 1 %>
+                          <span class="won-game">WON</span>
+                          <% end %>
+                        </td>
+                    </tr>
+                  <% } %>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          
-      </div>
+            
+        </div>
+      <% end %>
     <% end %>
     
     <% if @user == current_user %>
