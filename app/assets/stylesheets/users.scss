@@ -139,6 +139,17 @@ a:hover {
   }
 }
 
+/** Profile new game button */
+#profile-newgame {
+  .btn.btn-success {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 2em;
+  }
+}
+
+
 /* User profile edit page */
 #missing-user-name-alert {
   color: red;
