@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
     <h1 class="text-center profile-greeting">
-      <% if user_signed_in? %>
+      <% if @user == current_user %>
       Hello, <%= @user.name %>!
       <% else %>
         <%= @user.name %>'s profile
@@ -63,7 +63,7 @@
         
     </div>
     
-    <% if user_signed_in? %>
+    <% if @user == current_user %>
       <div id="profile-details" class="well text-center">
         <div class="row">
           <div class="col-sm-12">

@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :only_current_user
 
   # GET /games
   # GET /games.json
@@ -348,4 +350,10 @@ class GamesController < ApplicationController
       :guessed_letter_y, :guessed_letter_z,
       :guess_whole_word)
     end
+    
+    def only_current_user
+      @user = User.find( params[:user_id] )
+      redirect_to(root_url) unless @user == current_user
+    end
+    
 end
