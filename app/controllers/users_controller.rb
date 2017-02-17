@@ -26,6 +26,15 @@ class UsersController < ApplicationController
     @user_wins_count = @user_wins.length
     @user_success_ratio = (( @user_wins_count * 1.00) / @user_games_count * 100).round()
     
+    # Has user played all words available?
+    @all_words = Word.pluck(:word)
+    @user_games_words = @user.games.pluck(:secret_word)
+    @all_words.each { |w|
+      if !( @user_games_words.include? w )
+        @user_has_more_words_to_play = 1
+        break
+      end
+    }
   end
 
   # GET /users/new

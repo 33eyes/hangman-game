@@ -9,6 +9,9 @@
     </h1>
     <div id="profile-stats" class="well text-center">
         <h2>Game Stats</h2>
+        <% if (@user == current_user) && (@user_has_more_words_to_play.blank?) %>
+          <h3>You've played all available words!</h3>
+        <% end %>
         <div class="row">
           <div class="col-sm-4">
             <strong>Games played:</strong>

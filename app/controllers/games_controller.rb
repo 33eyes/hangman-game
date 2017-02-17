@@ -49,6 +49,10 @@ class GamesController < ApplicationController
       end
     }
     
+    if @new_secret_word.blank?
+        redirect_to user_path( params[:user_id] )
+    end
+    
   end
 
   # GET /games/1/edit
