@@ -1,22 +1,57 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Secret word:</strong>
-  <%= @game.secret_word %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @game.user_id %>
-</p>
-
-<p>
-  <strong>Outcome:</strong>
-  <%= @game.outcome %>
-</p>
-
-<p>
-  <strong>Letters guessed:</strong>
-  <%= @game.letters_guessed %>
-</p>
-
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-1">
+    <div class="well">
+      <div id="gallows-container" class="text-center">
+        <% if @game.outcome == 0 %>
+          <%= image_tag("gallows_10.png") %>
+        <% else %>
+          <% case @wrong_guesses_num %>
+          <%  when 0 %>
+            <%= image_tag("gallows_0.png") %>
+          <%  when 1 %>
+            <%= image_tag("gallows_1.png") %>
+          <%  when 2 %>
+            <%= image_tag("gallows_2.png") %>
+          <%  when 3 %>
+            <%= image_tag("gallows_3.png") %>
+          <%  when 4 %>
+            <%= image_tag("gallows_4.png") %>
+          <%  when 5 %>
+            <%= image_tag("gallows_5.png") %>
+          <%  when 6 %>
+            <%= image_tag("gallows_6.png") %>
+          <%  when 7 %>
+            <%= image_tag("gallows_7.png") %>
+          <%  when 8 %>
+            <%= image_tag("gallows_8.png") %>
+          <%  when 9 %>
+            <%= image_tag("gallows_9.png") %>
+          <%  when 10 %>
+            <%= image_tag("gallows_10.png") %>
+          <% end %>
+        <% end %>
+      </div>
+      <div id="secret-word-container" class="text-center">
+        <br>
+        <% @game.secret_word.split('').each { |secret_letter| %>
+          <% if @game.letters_guessed.downcase.include? secret_letter %>
+            <span class="shown-letter guessed-letter"><%= secret_letter.upcase %></span>
+          <% else %>
+            <span class="missed-letter"><%= secret_letter.upcase %></span>
+          <% end %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-sm-offset-1">
+    <div id="gameover-board" class="well text-center">
+      <% if @game.outcome == 0 %>
+        <h2 id="lost-game-message">You lost!</h2>
+      <% elsif @game.outcome == 1 %>
+        <h2 id="won-game-message">You won!</h2>
+      <% end %>
+      <hr>
+      <%= link_to "New Game", new_user_game_path(user_id: current_user.id), class: "btn btn-success" if user_signed_in? %>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,24 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    @user = User.find( params[:user_id] )
+    @game = @user.games.find( params[:id] )
+    
+    @game.letters_guessed = '' if @game.letters_guessed.nil?
+    @lguesses = @game.letters_guessed.downcase
+    
+    # Calculate wrong guesses count for gallows diagram
+    @correct_guesses_num = 0
+    @correct_guesses_list = []
+    @game.secret_word.split('').each_with_index { |ch, ind| 
+      if !( @game.secret_word.split('').take(ind).include? ch )
+        if @lguesses.include? ch 
+          @correct_guesses_num = @correct_guesses_num + 1
+          @correct_guesses_list.push(ch)
+        end
+      end
+    }
+    @wrong_guesses_num = @lguesses.length - @correct_guesses_num
   end
 
   # GET /games/new
@@ -39,7 +57,7 @@ class GamesController < ApplicationController
     @game.letters_guessed = '' if @game.letters_guessed.nil?
     @lguesses = @game.letters_guessed.downcase
     
-    # Count wrong guesses for gallows diagram
+    # Calculate wrong guesses count for gallows diagram
     @correct_guesses_num = 0
     @correct_guesses_list = []
     @game.secret_word.split('').each_with_index { |ch, ind| 
@@ -51,12 +69,6 @@ class GamesController < ApplicationController
       end
     }
     @wrong_guesses_num = @lguesses.length - @correct_guesses_num
-   
-      
-    # List all guessed letters do disable their buttons
-    
-    # List all correctly guessed letters to display them in the secret word box
-    
   end
 
   # POST /games
