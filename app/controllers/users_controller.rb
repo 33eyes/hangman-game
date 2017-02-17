@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :user_needs_name, only: [:show]
   
   # GET /users
   # GET /users.json
   def index
     @users = User.all
     @users_w_game_counts = User.select("users.*, COUNT(games.id) as games_count").joins("LEFT OUTER JOIN games ON (games.user_id = users.id)")
-    .where("games.outcome = 1")
+    .where("games.outcome = 1 AND users.name <> ''")
     .group("users.id")
     .order("games_count DESC")
     .limit(10)
@@ -24,7 +25,11 @@ class UsersController < ApplicationController
     
     @user_games_count = @user_games.length
     @user_wins_count = @user_wins.length
-    @user_success_ratio = (( @user_wins_count * 1.00) / @user_games_count * 100).round()
+    if @user_games_count > 0
+      @user_success_ratio = (( @user_wins_count * 1.00) / @user_games_count * 100).round()
+    else
+      @user_success_ratio = 0
+    end
     
     # Has user played all words available?
     @all_words = Word.pluck(:word)
@@ -97,5 +102,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email)
+    end
+    
+    def user_needs_name
+      redirect_to(edit_user_path(current_user)) if current_user.name.blank?
     end
 end

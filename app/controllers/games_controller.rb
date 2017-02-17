@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :only_current_user
+  before_action :user_needs_name
 
   # GET /games
   # GET /games.json
@@ -360,4 +361,7 @@ class GamesController < ApplicationController
       redirect_to(root_url) unless @user == current_user
     end
     
+    def user_needs_name
+      redirect_to(edit_user_path(current_user)) if current_user.name.blank?
+    end
 end

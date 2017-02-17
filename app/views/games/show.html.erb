@@ -34,7 +34,7 @@
       <div id="secret-word-container" class="text-center">
         <br>
         <% @game.secret_word.split('').each { |secret_letter| %>
-          <% if @game.letters_guessed.downcase.include? secret_letter %>
+          <% if ( (@game.letters_guessed.downcase.include? secret_letter) || (@game.outcome == 1) ) %>
             <span class="shown-letter guessed-letter"><%= secret_letter.upcase %></span>
           <% else %>
             <span class="missed-letter"><%= secret_letter.upcase %></span>

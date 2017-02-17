@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/* mouse over link */
+a:hover {
+  background-color: inherit;
+}
+
+/* Devise */
+#error_explanation {
+  width: inherit;
+}
+.field_with_errors {
+  display: inline-block;
+}
 
 /* Homepage */
 /** Leaderboard */
@@ -125,4 +137,9 @@
   a:hover {
     background-color: inherit;
   }
+}
+
+/* User profile edit page */
+#missing-user-name-alert {
+  color: red;
 }
