@@ -13,7 +13,7 @@
 
   <div id="guess-letters">
     <h2> Pick A Letter!</h2>
-    <% "ABCDEFGHIJKLMNOPQRSTUVWXYZ".each_char { |alpha| %>
+    <% ("A".."Z").each { |alpha| %>
       <% if @game.letters_guessed.include? alpha %>
         <%= submit_tag alpha, name: 'guessed_letter_' + alpha.downcase, class: "btn btn-primary", disabled: true %>
       <% else %>
@@ -22,11 +22,19 @@
     <% } %>
   </div>
   <hr>
+  <div id="guess-multi-letters" class="text-center">
+    <h2> Guess a bunch of letters at once!</h2>
+    <%= text_field_tag 'guess_multi_letters', nil, placeholder: 'Enter your guesses here' %>
+    <div class="actions">
+      <%= f.submit "Submit", name: 'guessed_multi_letters', class: "btn btn-warning" %>
+    </div>
+  </div>
+  <hr>
   <div id="guess-whole-word" class="text-center">
     <h2> Guess the whole word!</h2>
     <%= text_field_tag 'guess_whole_word', nil, placeholder: 'Enter your guess here' %>
     <div class="actions">
-      <%= f.submit "Submit", class: "btn btn-warning" %>
+      <%= f.submit "Submit", name: 'guessed_whole_word', class: "btn btn-warning" %>
     </div>
   </div>
 
