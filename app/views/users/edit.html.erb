@@ -2,14 +2,14 @@
   <div class="col-sm-8 col-sm-offset-2">
     <div class="well text-center">
       <h1>Edit your profile details</h1>
-    
+
       <% if @user.name.blank? %>
         <h3 id="missing-user-name-alert">Please enter your name</h3>
       <% end %>
-      
+
       <%= render 'form', user: @user %>
-      
-      <%= link_to 'Back to profile', @user %> 
+
+      <%= link_to 'Back to profile', @user %>
     </div>
   </div>
 </div>

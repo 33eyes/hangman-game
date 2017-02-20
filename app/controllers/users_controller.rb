@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :user_needs_name, only: [:show]
-  
+
   # GET /users
   # GET /users.json
   def index
@@ -18,11 +18,11 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    
-    # Look at the games the user played 
+
+    # Look at the games the user played
     @user_games = @user.games.where(outcome: [0, 1]).order(created_at: :desc)
     @user_wins = @user.games.where("outcome = 1")
-    
+
     @user_games_count = @user_games.length
     @user_wins_count = @user_wins.length
     if @user_games_count > 0
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     else
       @user_success_ratio = 0
     end
-    
+
     # Has user played all words available?
     @all_words = Word.pluck(:word)
     @user_games_words = @user.games.pluck(:secret_word)
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email)
     end
-    
+
     def user_needs_name
       redirect_to(edit_user_path(current_user)) if current_user.name.blank?
     end

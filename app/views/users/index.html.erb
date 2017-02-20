@@ -10,7 +10,7 @@
               <th>WINS</th>
             </tr>
           </thead>
-        
+
           <tbody>
             <% @users_w_game_counts.each do |user| %>
               <tr>
@@ -20,12 +20,12 @@
             <% end %>
           </tbody>
         </table>
-        
+
         <hr>
         <%= link_to "New Game", new_user_game_path(user_id: current_user.id), class: "btn btn-success" if user_signed_in? %>
       </div>
     </div>
   </div>
 </div>
-  
+
 

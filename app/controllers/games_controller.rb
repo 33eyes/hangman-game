@@ -15,16 +15,16 @@ class GamesController < ApplicationController
   def show
     @user = User.find( params[:user_id] )
     @game = @user.games.find( params[:id] )
-    
+
     @game.letters_guessed = '' if @game.letters_guessed.nil?
     @lguesses = @game.letters_guessed.downcase
-    
+
     # Calculate wrong guesses count for gallows diagram
     @correct_guesses_num = 0
     @correct_guesses_list = []
-    @game.secret_word.split('').each_with_index { |ch, ind| 
+    @game.secret_word.split('').each_with_index { |ch, ind|
       if !( @game.secret_word.split('').take(ind).include? ch )
-        if @lguesses.include? ch 
+        if @lguesses.include? ch
           @correct_guesses_num = @correct_guesses_num + 1
           @correct_guesses_list.push(ch)
         end
@@ -36,40 +36,40 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
-    
+
     # Find a new secret word that the user hasnt played yet
     @all_words = Word.pluck(:word)
-    
+
     @user = User.find(params[:user_id])
     @user_games_words = @user.games.pluck(:secret_word)
-    
+
     @all_words.each { |w|
       if !( @user_games_words.include? w )
         @new_secret_word = w
         break
       end
     }
-    
+
     if @new_secret_word.blank?
         redirect_to user_path( params[:user_id] )
     end
-    
+
   end
 
   # GET /games/1/edit
   def edit
     @user = User.find( params[:user_id] )
     @game = @user.games.find( params[:id] )
-    
+
     @game.letters_guessed = '' if @game.letters_guessed.nil?
     @lguesses = @game.letters_guessed.downcase
-    
+
     # Calculate wrong guesses count for gallows diagram
     @correct_guesses_num = 0
     @correct_guesses_list = []
-    @game.secret_word.split('').each_with_index { |ch, ind| 
+    @game.secret_word.split('').each_with_index { |ch, ind|
       if !( @game.secret_word.split('').take(ind).include? ch )
-        if @lguesses.include? ch 
+        if @lguesses.include? ch
           @correct_guesses_num = @correct_guesses_num + 1
           @correct_guesses_list.push(ch)
         end
@@ -83,7 +83,7 @@ class GamesController < ApplicationController
   def create
     # Get the current user
     @user = User.find( params[:user_id] )
-  
+
     # Find a new secret word that the user hasnt played yet
     @all_words = Word.pluck(:word)
     @user_games_words = @user.games.pluck(:secret_word)
@@ -93,13 +93,13 @@ class GamesController < ApplicationController
         break
       end
     }
-    
+
     @game = Game.new
     @game.user_id = params[:user_id]
     @game.secret_word = @new_secret_word
-     
+
     @guess_whole_word = params[:guess_whole_word].downcase
-     
+
     if params[:guessed_letter_a] == 'A'
         @game.letters_guessed = 'A'
     elsif params[:guessed_letter_b] == 'B'
@@ -152,7 +152,7 @@ class GamesController < ApplicationController
         @game.letters_guessed = 'Y'
     elsif params[:guessed_letter_z] == 'Z'
         @game.letters_guessed = 'Z'
-        
+
     elsif !(@guess_whole_word.blank?)
       # Guessing the whole word on the 1st try
       @game.letters_guessed = ""
@@ -162,7 +162,7 @@ class GamesController < ApplicationController
         @game.outcome = 0
       end
     end
-     
+
     if @game.save
       if ( (@game.outcome == 1) || (@game.outcome == 0) )
         # If the game is over
@@ -177,7 +177,7 @@ class GamesController < ApplicationController
       flash[:alert] = "Something went wrong. Let's try again."
       render action: :new
     end
-    
+
     #respond_to do |format|
     #  if @game.save
     #    format.html { redirect_to @game, notice: 'Game was successfully created.' }
@@ -192,13 +192,13 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
-    
+
     @user = User.find( params[:user_id] )
     @game = @user.games.find( params[:id] )
-    
+
     # Process guesses
     @guess_whole_word = params[:guess_whole_word].downcase
-    
+
     @new_letter_guess = ''
     if params[:guessed_letter_a] == 'A'
         @new_letter_guess = 'A'
@@ -252,7 +252,7 @@ class GamesController < ApplicationController
         @new_letter_guess = 'Y'
     elsif params[:guessed_letter_z] == 'Z'
         @new_letter_guess = 'Z'
-        
+
     elsif !(@guess_whole_word.blank?)
       # Guessing the whole word
       if @guess_whole_word == @game.secret_word
@@ -261,24 +261,24 @@ class GamesController < ApplicationController
         @game.outcome = 0
       end
     end
-    
+
     if !( (@game.outcome == 1) || (@game.outcome == 0) )
       # Calculate new game outcome (0, 1, or nil)
       @game.letters_guessed = '' if @game.letters_guessed.nil?
       @game.letters_guessed = @game.letters_guessed + @new_letter_guess
-      
+
       @lguesses = @game.letters_guessed.downcase
       @correct_guesses_num = 0
       @secret_word_unique_letters_count = 0
-      @game.secret_word.split('').each_with_index { |ch, ind| 
+      @game.secret_word.split('').each_with_index { |ch, ind|
         if !( @game.secret_word.split('').take(ind).include? ch )
-          if @lguesses.include? ch 
+          if @lguesses.include? ch
             @correct_guesses_num = @correct_guesses_num + 1
           end
           @secret_word_unique_letters_count = @secret_word_unique_letters_count + 1
         end
       }
-      
+
       # Did user guess all letters of secret word?
       if @correct_guesses_num == @secret_word_unique_letters_count
         # Won game, b/c user guessed all letters of secret word
@@ -295,7 +295,7 @@ class GamesController < ApplicationController
         end
       end
     end
-    
+
     if @game.update_attributes(:outcome => @game.outcome, :letters_guessed => @game.letters_guessed)
       if ( (@game.outcome == 1) || (@game.outcome == 0) )
         # If the game is over
@@ -310,7 +310,7 @@ class GamesController < ApplicationController
       flash[:alert] = "Something went wrong. Let's try again."
       render action: :edit
     end
-    
+
     #respond_to do |format|
     #  if @game.update(game_params)
     #    format.html { redirect_to @game, notice: 'Game was successfully updated.' }
@@ -355,12 +355,12 @@ class GamesController < ApplicationController
       :guessed_letter_y, :guessed_letter_z,
       :guess_whole_word)
     end
-    
+
     def only_current_user
       @user = User.find( params[:user_id] )
       redirect_to(root_url) unless @user == current_user
     end
-    
+
     def user_needs_name
       redirect_to(edit_user_path(current_user)) if current_user.name.blank?
     end

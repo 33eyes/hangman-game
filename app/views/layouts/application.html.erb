@@ -6,12 +6,12 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
   </head>
 
   <body>
-    
+
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class='container'>
         <div class="navbar-header">
@@ -35,7 +35,7 @@
               <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default navbar-btn" %>
             <% end %>
           </div>
-          
+
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "Play", new_user_game_path(user_id: current_user.id) if user_signed_in? %></li>
             <li><%= link_to "Leaderboard", "/" if user_signed_in? %></li>
@@ -45,11 +45,11 @@
         </div><!-- /.navbar-collapse -->
       </div>
     </nav>
-    
-    
+
+
     <div class="container">
       <%= yield %>
     </div>
-    
+
   </body>
 </html>

@@ -19,12 +19,12 @@ a:hover {
 /** Leaderboard */
 #leaderboard {
   margin-bottom: 2em;
-  
+
   h1 {
     color: green;
     font-weight: bold;
   }
-  
+
   table {
     margin: 0 auto;
     text-align: left;
@@ -37,18 +37,18 @@ a:hover {
     padding: 0 40px;
     text-align: center;
   }
-  
+
   td {
     /* mouse over link */
     a:hover {
       background-color: inherit;
     }
   }
-  
+
   tbody tr:hover {
     background-color: rgba(0, 0, 255, 0.23);
   }
-  
+
   .btn.btn-success {
     color: white;
     font-weight: bold;
@@ -68,12 +68,12 @@ a:hover {
 /** Profile stats */
 #profile-stats {
   margin-bottom: 2em;
-  
+
   h2 {
       margin-top: 0;
       color: blue;
   }
-  
+
   h3 {
       color: purple;
   }
@@ -82,12 +82,12 @@ a:hover {
 /** Profile game history */
 #profile-history {
   margin-bottom: 2em;
-  
+
   h2 {
       margin-top: 0;
       color: blue;
   }
-  
+
   table {
     margin: 0 auto;
     text-align: left;
@@ -100,13 +100,13 @@ a:hover {
     padding: 0 10px;
    // text-align: center;
   }
-  
+
   td {
     /* mouse over link */
     a:hover {
       background-color: inherit;
     }
-    
+
     .lost-game {
       color: red;
       font-weight: bold;
@@ -116,23 +116,23 @@ a:hover {
       font-weight: bold;
     }
   }
-  
+
   tbody tr:hover {
     background-color: rgba(0, 0, 255, 0.23);
   }
-  
+
 }
 
 
 /** Profile details */
 #profile-details {
   margin-bottom: 2em;
-  
+
   h2 {
       margin-top: 0;
       color: blue;
   }
-  
+
   /* mouse over link */
   a:hover {
     background-color: inherit;
