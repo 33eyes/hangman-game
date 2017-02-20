@@ -69,61 +69,11 @@ class GamesController < ApplicationController
     @game.secret_word = @new_secret_word
 
     @guess_whole_word = params[:guess_whole_word].downcase
+    ("a".."z").each { |letter| 
+      @game.letters_guessed = params["guessed_letter_" + letter] if !( params["guessed_letter_" + letter].blank? )
+    }
 
-    if params[:guessed_letter_a] == 'A'
-        @game.letters_guessed = 'A'
-    elsif params[:guessed_letter_b] == 'B'
-        @game.letters_guessed = 'B'
-    elsif params[:guessed_letter_c] == 'C'
-        @game.letters_guessed = 'C'
-    elsif params[:guessed_letter_d] == 'D'
-        @game.letters_guessed = 'D'
-    elsif params[:guessed_letter_e] == 'E'
-        @game.letters_guessed = 'E'
-    elsif params[:guessed_letter_f] == 'F'
-        @game.letters_guessed = 'F'
-    elsif params[:guessed_letter_g] == 'G'
-        @game.letters_guessed = 'G'
-    elsif params[:guessed_letter_h] == 'H'
-        @game.letters_guessed = 'H'
-    elsif params[:guessed_letter_i] == 'I'
-        @game.letters_guessed = 'I'
-    elsif params[:guessed_letter_j] == 'J'
-        @game.letters_guessed = 'J'
-    elsif params[:guessed_letter_k] == 'K'
-        @game.letters_guessed = 'K'
-    elsif params[:guessed_letter_l] == 'L'
-        @game.letters_guessed = 'L'
-    elsif params[:guessed_letter_m] == 'M'
-        @game.letters_guessed = 'M'
-    elsif params[:guessed_letter_n] == 'N'
-        @game.letters_guessed = 'N'
-    elsif params[:guessed_letter_o] == 'O'
-        @game.letters_guessed = 'O'
-    elsif params[:guessed_letter_p] == 'P'
-        @game.letters_guessed = 'P'
-    elsif params[:guessed_letter_q] == 'Q'
-        @game.letters_guessed = 'Q'
-    elsif params[:guessed_letter_r] == 'R'
-        @game.letters_guessed = 'R'
-    elsif params[:guessed_letter_s] == 'S'
-        @game.letters_guessed = 'S'
-    elsif params[:guessed_letter_t] == 'T'
-        @game.letters_guessed = 'T'
-    elsif params[:guessed_letter_u] == 'U'
-        @game.letters_guessed = 'U'
-    elsif params[:guessed_letter_v] == 'V'
-        @game.letters_guessed = 'V'
-    elsif params[:guessed_letter_w] == 'W'
-        @game.letters_guessed = 'W'
-    elsif params[:guessed_letter_x] == 'X'
-        @game.letters_guessed = 'X'
-    elsif params[:guessed_letter_y] == 'Y'
-        @game.letters_guessed = 'Y'
-    elsif params[:guessed_letter_z] == 'Z'
-        @game.letters_guessed = 'Z'
-
-    elsif !(@guess_whole_word.blank?)
+    if ( @game.letters_guessed.blank? && !(@guess_whole_word.blank?) )
       # Guessing the whole word on the 1st try
       @game.letters_guessed = ""
       if @guess_whole_word == @game.secret_word
@@ -170,60 +120,11 @@ class GamesController < ApplicationController
     @guess_whole_word = params[:guess_whole_word].downcase
 
     @new_letter_guess = ''
-    if params[:guessed_letter_a] == 'A'
-        @new_letter_guess = 'A'
-    elsif params[:guessed_letter_b] == 'B'
-        @new_letter_guess = 'B'
-    elsif params[:guessed_letter_c] == 'C'
-        @new_letter_guess = 'C'
-    elsif params[:guessed_letter_d] == 'D'
-        @new_letter_guess = 'D'
-    elsif params[:guessed_letter_e] == 'E'
-        @new_letter_guess = 'E'
-    elsif params[:guessed_letter_f] == 'F'
-        @new_letter_guess = 'F'
-    elsif params[:guessed_letter_g] == 'G'
-        @new_letter_guess = 'G'
-    elsif params[:guessed_letter_h] == 'H'
-        @new_letter_guess = 'H'
-    elsif params[:guessed_letter_i] == 'I'
-        @new_letter_guess = 'I'
-    elsif params[:guessed_letter_j] == 'J'
-        @new_letter_guess = 'J'
-    elsif params[:guessed_letter_k] == 'K'
-        @new_letter_guess = 'K'
-    elsif params[:guessed_letter_l] == 'L'
-        @new_letter_guess = 'L'
-    elsif params[:guessed_letter_m] == 'M'
-        @new_letter_guess = 'M'
-    elsif params[:guessed_letter_n] == 'N'
-        @new_letter_guess = 'N'
-    elsif params[:guessed_letter_o] == 'O'
-        @new_letter_guess = 'O'
-    elsif params[:guessed_letter_p] == 'P'
-        @new_letter_guess = 'P'
-    elsif params[:guessed_letter_q] == 'Q'
-        @new_letter_guess = 'Q'
-    elsif params[:guessed_letter_r] == 'R'
-        @new_letter_guess = 'R'
-    elsif params[:guessed_letter_s] == 'S'
-        @new_letter_guess = 'S'
-    elsif params[:guessed_letter_t] == 'T'
-        @new_letter_guess = 'T'
-    elsif params[:guessed_letter_u] == 'U'
-        @new_letter_guess = 'U'
-    elsif params[:guessed_letter_v] == 'V'
-        @new_letter_guess = 'V'
-    elsif params[:guessed_letter_w] == 'W'
-        @new_letter_guess = 'W'
-    elsif params[:guessed_letter_x] == 'X'
-        @new_letter_guess = 'X'
-    elsif params[:guessed_letter_y] == 'Y'
-        @new_letter_guess = 'Y'
-    elsif params[:guessed_letter_z] == 'Z'
-        @new_letter_guess = 'Z'
-
-    elsif !(@guess_whole_word.blank?)
+    ("a".."z").each { |letter| 
+      @new_letter_guess = params["guessed_letter_" + letter] if !( params["guessed_letter_" + letter].blank? )
+    }
+    
+    if ( @new_letter_guess.blank? && !(@guess_whole_word.blank?) )
       # Guessing the whole word
       if @guess_whole_word == @game.secret_word
         @game.outcome = 1
