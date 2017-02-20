@@ -15,22 +15,7 @@ class GamesController < ApplicationController
   def show
     @user = User.find( params[:user_id] )
     @game = @user.games.find( params[:id] )
-
-    @game.letters_guessed = '' if @game.letters_guessed.nil?
-    @lguesses = @game.letters_guessed.downcase
-
-    # Calculate wrong guesses count for gallows diagram
-    @correct_guesses_num = 0
-    @correct_guesses_list = []
-    @game.secret_word.split('').each_with_index { |ch, ind|
-      if !( @game.secret_word.split('').take(ind).include? ch )
-        if @lguesses.include? ch
-          @correct_guesses_num = @correct_guesses_num + 1
-          @correct_guesses_list.push(ch)
-        end
-      end
-    }
-    @wrong_guesses_num = @lguesses.length - @correct_guesses_num
+    gallows_calc
   end
 
   # GET /games/new
@@ -60,22 +45,7 @@ class GamesController < ApplicationController
   def edit
     @user = User.find( params[:user_id] )
     @game = @user.games.find( params[:id] )
-
-    @game.letters_guessed = '' if @game.letters_guessed.nil?
-    @lguesses = @game.letters_guessed.downcase
-
-    # Calculate wrong guesses count for gallows diagram
-    @correct_guesses_num = 0
-    @correct_guesses_list = []
-    @game.secret_word.split('').each_with_index { |ch, ind|
-      if !( @game.secret_word.split('').take(ind).include? ch )
-        if @lguesses.include? ch
-          @correct_guesses_num = @correct_guesses_num + 1
-          @correct_guesses_list.push(ch)
-        end
-      end
-    }
-    @wrong_guesses_num = @lguesses.length - @correct_guesses_num
+    gallows_calc
   end
 
   # POST /games
@@ -363,5 +333,21 @@ class GamesController < ApplicationController
 
     def user_needs_name
       redirect_to(edit_user_path(current_user)) if current_user.name.blank?
+    end
+    
+    def gallows_calc
+      @game.letters_guessed = '' if @game.letters_guessed.nil?
+      @lguesses = @game.letters_guessed.downcase
+  
+      # Calculate wrong guesses count for gallows diagram
+      @correct_guesses_num = 0
+      @game.secret_word.split('').each_with_index { |ch, ind|
+        if !( @game.secret_word.split('').take(ind).include? ch )
+          if @lguesses.include? ch
+            @correct_guesses_num = @correct_guesses_num + 1
+          end
+        end
+      }
+      @wrong_guesses_num = @lguesses.length - @correct_guesses_num
     end
 end
