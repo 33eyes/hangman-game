@@ -4,10 +4,10 @@ one:
   secret_word: MyString
   user_id: 1
   outcome: 1
-  letters_guessed: MyString
+  letters_guessed: MYSTRING
 
 two:
-  secret_word: MyString
+  secret_word: MyStrings
   user_id: 1
   outcome: 1
-  letters_guessed: MyString
+  letters_guessed: MYSTRINGS
